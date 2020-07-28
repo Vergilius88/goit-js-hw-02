@@ -1,35 +1,37 @@
 "use strict";
 
 function formatString(value) {
-	const returnText = [];
+  const returnText = [];
 
-	for (let i = 0; i < value.length; i++) {
-		
+  for (let i = 0; i < value.length; i++) {
+    if (i < 40) {
+      let excessText = value[i];
+      returnText.push(excessText);
+    } else if (i === 40) {
+      returnText.push("...");
+    }
+  }
 
-		if (i < 40) {
-			
-			let excessText = value[i]; 
-			returnText.push(excessText); 
-		} else if (i === 40) {
-			
-			returnText.push('...');
-		}
-	}
-
-	return returnText.join(''); 
+  return returnText.join("");
 }
 
-const formatString = (string, stringMaxLength = 40) =>
-	string.length > stringMaxLength ? `${string.slice(0, stringMaxLength - 1)}...` : string;
+const stringConversion = (string, stringMaxLength = 40) =>
+  string.length > stringMaxLength
+    ? `${string.slice(0, stringMaxLength - 1)}...`
+    : string;
 
+// Test:
 
-console.log(formatString('Curabitur ligula sapien, tincidunt non.'));
+console.log(stringConversion("Curabitur ligula sapien, tincidunt non."));
 
+console.log(
+  stringConversion("Vestibulum facilisis, purus nec pulvinar iaculis.")
+);
 
-console.log(formatString('Vestibulum facilisis, purus nec pulvinar iaculis.'));
+console.log(stringConversion("Curabitur ligula sapien."));
 
-
-console.log(formatString('Curabitur ligula sapien.'));
-
-
-console.log(formatString('Nunc sed turpis. Curabitur a felis in nunc fringilla tristique.'));
+console.log(
+  stringConversion(
+    "Nunc sed turpis. Curabitur a felis in nunc fringilla tristique."
+  )
+);
